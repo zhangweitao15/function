@@ -143,8 +143,8 @@ border-collapse；
 ## rem Js部分
 
 ```js
-/*
-REM
+/* REM*/
+
  window.onresize = function () {
         var current =  document.documentElement.clientWidth; // 获取屏幕可视区域的宽度
         document.documentElement.style.fontSize = current * 100 / 640 + 'px'; 将计算好的 字体大小设置给html
@@ -152,6 +152,9 @@ REM
     //因为js垃圾回收机制 函数执行完成立即销毁， 所以将函数 内部执行的代码再次执行一遍
     var current =  document.documentElement.clientWidth;
     document.documentElement.style.fontSize = current * 100 / 640 + 'px';
-*/
+
 ```
 
+## 清除便签前面的点
+
+list-style: none;
