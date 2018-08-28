@@ -1,0 +1,80 @@
+<!-- 格式化时间  补零
+    格式化时间
+- 时：Math.floor(t%86400/3600)
+- 分：Math.floor(t%86400%3600/60)
+- 秒：Math.floor(t%60)
+补零
+- 百以内取十位 Math.floor(num/10)
+- 百以内取个位 num%10 
+
+
+/*
+倒计时
+	// 获取目标时间
+	var endTime = new Date(2018, 8, 5, 12, 58, 0).getTime();
+	// 定义计时器 
+	var time = setInterval(function () {
+		// 获取当前的时间
+		var now = new Date().getTime();
+		// 计算倒计时 并将毫秒转换成秒
+		var t = (endTime - now) / 1000;
+		if (t <= 0 ) {
+			clearInterval(time);
+			return;
+		}
+		// console.log(t);
+		// 将时间格式化
+		var hour = Math.floor(t%86400/3600)
+		var minute = Math.floor(t%86400%3600/60)
+		var second = Math.floor(t%60)
+
+		//补零
+		// - 百以内取十位 Math.floor(num/10)
+		// - 百以内取个位 num%10 
+		spans[0].innerText = Math.floor(hour/10)
+		spans[1].innerText = hour%10
+		spans[3].innerText = Math.floor(minute/10)
+		spans[4].innerText = minute%10
+		spans[6].innerText = Math.floor(second/10)
+		spans[7].innerText = second%10
+
+	}, 1000);
+*/ 
+
+	-->
+	<!--运功函数
+	function move(element, target) {
+		clearInterval(element.timer);//清除旧的定时器，保证匀速运动，防止加速效果
+		element.timer = setInterval(function () {
+		//1 获取元素当前位置 使用offsetLeft属性
+		var current = element.offsetLeft;
+		//2 设置步长
+		var step = 17;
+		//根据当前位置和目标位置的大小关系进行判断
+		step = target > current ? step : -step;
+		//5 运动条件设置
+		//检测当前位置和目标位置之间的距离，如果满足一个step的距离，可以运动，否则直接运动到目标位置，结束
+		if (Math.abs(target - current) > Math.abs(step)) {
+			//3 设置运动公式:元素位置(新) = 元素位置(旧) + 步长;
+			current = current + step;
+			//4 设置给元素的left值运动
+			element.style.left = current + "px";
+		} else {
+			//6 让element直接运动到目标位置，再清除定时器
+			element.style.left = target + "px";
+			clearInterval(element.timer);
+		}
+		}, 20);
+	}
+ -->
+<!--对象覆盖
+// 对象覆盖; (参数都为对象
+		后边的参数覆盖前面的参数,
+		// 且覆盖结果会影响到原对象)
+		Object.assign(defaults, options);
+-->
+
+
+
+
+ 

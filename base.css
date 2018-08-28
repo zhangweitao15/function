@@ -1,0 +1,165 @@
+﻿body,
+h1,
+h3,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+dl,
+dt,
+dd,
+p,
+input,
+figure {
+    margin: 0;
+    padding: 0;
+}
+h4 {
+    font-weight: 400;
+}
+body {
+    font: 14px arial, 'microsoft yahei';
+    background-color: #f5f5f5;
+    color: #333b36;
+    /* 手机手机端取出 a标签点击高亮 */
+    -webkit-tap-highlight-color: transparent;
+}
+.w {
+    width: 1200px;
+    margin: 0 auto;
+}
+img {
+    /* 解决基线对齐问题 */
+    vertical-align: middle;
+    /* 解决旧版本的ie 图片默认边框 */
+    border: 0 none; 
+    outline: none;
+}
+a {
+    /* 清除a标签默认样式 */
+    text-decoration: none;
+    color: #333;
+}
+
+/* a:hover {
+    color: #ff0000;
+} */
+a:hover {
+    /* 清除a标签的默认样式 */
+	text-decoration: none;
+}
+
+
+/*h1,h2,h3,h4,h5,h6, {
+    font-weight: 400;
+}*/
+
+li,
+dd {
+    list-style: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+.w50 {
+    width: 50%;
+}
+.br {
+    border-right: 1px solid #e0e0e0;
+}
+.bd {
+    border-bottom: 1px solid #e0e0e0;
+}
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+i,
+em {
+    /* 去除文字倾斜 */
+    font-style: normal;
+}
+
+.red {
+    color: #d8505c;
+}
+
+.greend {
+    color: #2cb82c;
+}
+.tc {
+    text-align: center;
+}
+.oh {
+    /*溢出隐藏*/
+    overflow: hidden;
+}
+input {
+    /* 清除input默认样式 */
+    outline: none;
+    border: none;
+}
+
+* {
+    /* 内减盒模型 */
+    box-sizing: border-box;
+}
+.poa {
+    position: absolute;
+}
+.por {
+    position: relative;
+}
+
+
+/* 实现(...)
+前置一行显示
+white-space:nowrap
+溢出隐藏
+overflow:hidden
+显示...
+text-overflow:ellipsis
+*/
+/**表格边框合并   border-collapse */
+
+/* 
+在移动端让区域滚动更加顺滑 在模拟器中看不到效果 需要在真机中查看
+ -webkit-overflow-scrolling: touch; 
+ */
+
+ /*字体图标
+    的引入
+    @font-face {
+  font-family: 'XXX';// 字体名称
+  src: url('../font/MiFie-Web-Font.eot') format('embedded-opentype'), 
+  url('../font/MiFie-Web-Font.svg') format('svg'), 
+  url('../font/MiFie-Web-Font.ttf') format('truetype'), 
+  url('../font/MiFie-Web-Font.woff') format('woff');
+}
+*/
+/*
+rem公式
+ window.onresize = function () {
+        var current =  document.documentElement.clientWidth; // 获取屏幕可视区域的宽度
+        document.documentElement.style.fontSize = current * 100 / 640 + 'px'; 将计算好的 字体大小设置给html
+    }
+    var current =  document.documentElement.clientWidth;
+    document.documentElement.style.fontSize = current * 100 / 640 + 'px';
+*/
