@@ -155,6 +155,6 @@ border-collapse；
 
 ```
 
-## 清除便签前面的点
+## 清除标签前面的点
 
 list-style: none;
