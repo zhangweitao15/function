@@ -56,7 +56,7 @@ a:hover {
     font-weight: 400;
 }*/
 
-li,
+ul,
 dd {
     list-style: none;
 }

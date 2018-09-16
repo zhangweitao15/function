@@ -30,6 +30,57 @@ function move(element, target) {
   }
 ```
 
+## 获取地址栏参数
+
+```js
+function getParamsByUrl(url,name){
+
+	var params = url.substr(url.indexOf('?')+1).split('&');
+
+	for(var i=0;i<params.length;i++){
+
+		var param = params[i].split('=');
+
+		if(param[0] == name){
+
+			return param[1];
+
+		}
+
+	}
+
+	return null;
+
+}
+```
+
+## jQuery对象方法 获取表单数据 返回json
+
+```js
+/*
+	实现一个jQuery对象方法
+
+	获取表单数据 返回对象格式的数据
+*/
+
+$.fn.serializeToJson = function () {
+	// 结果对象
+	var result = {};
+
+	// 当前方法中的this是谁?
+	// 谁调用我 我就是谁
+	var formData = this.serializeArray();
+	// 循环表单数据
+	for (var i = 0; i < formData.length; i++) {
+		// 将表单数据对应字段放在结果对象中
+		result[formData[i].name] = formData[i].value;
+	}
+
+	// 将结果返回的函数外部
+	return result;
+};
+```
+
 
 
 # html的默认样式
@@ -155,6 +206,6 @@ border-collapse；
 
 ```
 
-## 清除标签前面的点
+## 清除ul li 标签的默认样式
 
 list-style: none;
