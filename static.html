@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+        
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .screen {
+            width: 500px;
+            height: 200px;
+            /*overflow: hidden;*/
+            position: relative;
+        }
+        
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+        
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3000px;
+        }
+        
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+        
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .all ol li.current {
+            background: yellow;
+        }
+        
+        #arr {
+            display: none;
+        }
+        
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+        
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all" id='box'>
+        <div class="screen">
+            <ul>
+                <li><img src="images/1.jpg" width="500" height="200" /></li>
+                <li><img src="images/2.jpg" width="500" height="200" /></li>
+                <li><img src="images/3.jpg" width="500" height="200" /></li>
+                <li><img src="images/4.jpg" width="500" height="200" /></li>
+                <li><img src="images/5.jpg" width="500" height="200" /></li>
+            </ul>
+            <ol>
+                <!-- 动态创建的小方块，添加在这里，样式已经给写好了-->
+            </ol>
+        </div>
+        <div id="arr">
+            <span id="left">&lt;</span>
+            <span id="right">&gt;</span>
+        </div>
+    </div>
+
+
+    <script>
+        // 轮播图功能的分析：
+        //   1 底部的小方块点击功能
+        //   2 左右箭头操作
+        //   3 无缝效果
+        //   4 自动播放
+
+
+        //  实现方式：
+        //    元素的获取：
+        var box = document.getElementById('box');
+        var screenBox = box.children[0];
+        var ul = screenBox.children[0]; // 要运动的ul
+        var lisUl = ul.children; // 所有的图片
+        var ol = screenBox.children[1]; // 底部小方块的父盒子
+        var lisOl = ol.children; // 所有的底部小方块
+        var arrBox = box.children[1]; // 箭头的父盒子
+        var arrLeft = arrBox.children[0]; // 左箭头
+        var arrRight = arrBox.children[1]; // 右箭头
+        var imgWidth = screenBox.offsetWidth; // 可视区域的宽度，代表了图片宽度
+
+
+        //  1 底部小方块的动态创建(为了后期的维护方便)
+        for (var i = 0; i < lisUl.length; i++) {
+            var li = document.createElement('li');
+            li.innerText = i + 1;
+            ol.appendChild(li);
+        }
+
+        // 2 给第一个ol中的li设置类名current，设置高亮显示
+        lisOl[0].className = 'current';
+
+        // 3 点击小方块设置功能
+        for (i = 0; i < lisOl.length; i++) {
+            lisOl[i].index = i;
+            // lisOl[i].setAttribute('data-index', i);
+
+            lisOl[i].onclick = function() {
+                // --- 后期添加：为了防止假的第一张显示时，点击小方块出现回滚的问题
+                if (count === lisUl.length - 1) {
+                    // 设置ul抽回到0
+                    ul.style.left = 0 + 'px';
+                }
+
+                // 3.1 按钮点击变色
+                for (var i = 0; i < lisOl.length; i++) {
+                    lisOl[i].className = '';
+                }
+                this.className = 'current';
+                // 3.2 ul的运动效果
+                // 运动规律分析：
+                //    点击按钮1   left为- 0 * 500
+                //    点击按钮2   left为- 1 * 500
+                //    点击按钮3   left为- 2 * 500
+                //    点击某个按钮 left为： - 按钮下标 * 图片的宽度
+                // 注意的点：图片的尺寸获取时由于需要网络加载，所以不要直接获取，需要借助可视区域的尺寸
+                move(ul, -this.index * imgWidth);
+
+                // --- 后期添加：点击小方块时，需要将count的值与当前按钮的下标同步
+                count = this.index;
+            };
+        }
+
+        // 4 左右按钮操作
+        //   规律分析：左右运动的控制方式是使用一个变量记录  滚出到可是区域外(左侧)的图片张数
+        var count = 0;
+
+        // 4.1 鼠标移入移出设置箭头显示与隐藏
+        /*box.onmouseover = function () {
+          arrBox.style.display = 'block';
+        };
+        box.onmouseout = function () {
+          arrBox.style.display = 'none';
+        };*/
+
+        // 4.2 设置左右按钮点击操作
+        //   右按钮点击后，设置滚出张数+1
+        arrRight.onclick = function() {
+            // --- 当页面中显示假的第一张时，不能正常的滚动了，需要先抽回到真正的第一张图片位置
+            if (count === lisUl.length - 1) {
+                ul.style.left = 0 + 'px';
+                count = 0;
+            }
+            count++;
+            // 根据count设置ul的运动位置：  -count * imgWidth
+            move(ul, -count * imgWidth);
+            // 设置按钮变色效果：
+            //     通过观察我们发现，当前要高亮显示的小方块的下标与count相同
+            for (var i = 0; i < lisOl.length; i++) {
+                lisOl[i].className = '';
+            }
+            // --- 当页面显示假的第一张时，count为5，导致下面出现问题，单独判断
+            if (count === lisUl.length - 1) {
+                lisOl[0].className = 'current';
+            } else {
+                lisOl[count].className = 'current';
+            }
+        };
+        // 假的第一张对应的count为lisUl.length - 1
+        //  左按钮点击后，设置滚出张数-1
+        arrLeft.onclick = function() {
+            // 当页面显示第一张图时，点击左按钮，将ul抽回到假的第一张显示的位置
+            if (count === 0) {
+                ul.style.left = -(lisUl.length - 1) * imgWidth + 'px';
+                count = lisUl.length - 1;
+            }
+
+
+            count--;
+            // 根据count设置ul的运动位置：  -count * imgWidth
+            move(ul, -count * imgWidth);
+
+            for (var i = 0; i < lisOl.length; i++) {
+                lisOl[i].className = '';
+            }
+            lisOl[count].className = 'current';
+        };
+
+        // 5 无缝滚动效果
+        //   5.1 假的第一张图片的克隆
+        var firstPic = lisUl[0].cloneNode(true); // 克隆的假的第一张
+        ul.appendChild(firstPic);
+
+        // 6 自动播放
+        //   自动播放实际上就是间隔一段时间执行以下右按钮的点击效果
+        var timer = null;
+        timer = setInterval(function() {
+            arrRight.onclick();
+        }, 2000);
+
+        // 鼠标移入移出，设置自动播放停止以及开启
+        box.onmouseover = function() {
+            arrBox.style.display = 'block';
+            clearInterval(timer);
+        };
+        box.onmouseout = function() {
+            arrBox.style.display = 'none';
+            timer = setInterval(function() {
+                arrRight.onclick();
+            }, 2000);
+        };
+
+        // 这个函数的功能是让指定的元素element运动到left为target的位置上
+        function move(element, target) {
+            clearInterval(element.timer); //清除旧的定时器，保证匀速运动，防止加速效果
+            element.timer = setInterval(function() {
+                //1 获取元素当前位置 使用offsetLeft属性
+                var current = element.offsetLeft;
+                //2 设置步长
+                var step = 17;
+                //根据当前位置和目标位置的大小关系进行判断
+                step = target > current ? step : -step;
+                //5 运动条件设置
+                //检测当前位置和目标位置之间的距离，如果满足一个step的距离，可以运动，否则直接运动到目标位置，结束
+                if (Math.abs(target - current) > Math.abs(step)) {
+                    //3 设置运动公式:元素位置(新) = 元素位置(旧) + 步长;
+                    current = current + step;
+                    //4 设置给元素的left值运动
+                    element.style.left = current + "px";
+                } else {
+                    //6 让element直接运动到目标位置，再清除定时器
+                    element.style.left = target + "px";
+                    clearInterval(element.timer);
+                }
+            }, 20);
+        }
+    </script>
+</body>
+
+</html>
