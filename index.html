@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封装移动端手势事件</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        // 封装手势事件
+        /*
+            1. 确定用户是水平滑动还是垂直划定
+
+            2. 确定用户滑动的方向
+        */
+       function gesture(le, options) {
+           var startX = 0,
+                startY = 0,
+                moveX = 0,
+                moveY = 0,
+                absX = 0,
+                absY = 0,
+                isMove = false,
+                disX = 0,
+                disY = 0,
+                // 创建变量未参数2 设置参数
+                defaules = {
+                    gestureLeft: function () {},  
+                    gestureRight: function () {},
+                    gestureDown: function () {},
+                    gestureUp: function () {},
+                    drag: function () {}
+                };
+                // 如果用户输入了使用用户输入的,没输入使用默认值
+                // 覆盖对象 用传入的参数覆盖设置的默认值
+                Object.assign(defaules, options);
+           // 记录滑动开始的坐标
+           le.addEventListener('touchstart', function (e) {
+               startX = e.touches[0].pageX;
+               startY = e.touches[0].pageY;
+               disX = startX - le.offsetLeft;
+               disY = startY - le.offsetTop;
+           })
+           // 记录滑动结束的位置
+           le.addEventListener('touchmove', function(e) {
+               moveX = e.touches[0].pageX;
+               moveY = e.touches[0].pageY;
+               // 如果没有触发移动事件 后边的判断不会进行
+              isMove = true;
+              // 当start事件触发时 的x和y 的坐标值保存到当前对象中
+              e.info = {
+                  startX: startX,
+                  startY: startY,
+                  disX: disX,
+                  disY: disY
+              }
+              defaules.drag.call(le, e);
+           })
+           // 判断滑动的方向
+           le.addEventListener('touchend', function(e) {
+               if (isMove) {
+               absX = Math.abs(moveX - startX);
+               absY = Math.abs(moveY - startY);
+               if (absX > absY) {
+                   //水平
+                //console.log('水平');
+                   if (moveX - startX > 0 ) {
+                    //    console.log('向右');
+                    defaules.gestureRight.call(le, e)
+                   } else {
+                    //    console.log('向左')
+                    defaules.gestureLeft.call(le, e)
+                   }
+               } else {
+                   //垂直
+                //console.log('垂直');
+                    if (moveY - startY > 0) {
+                        // console.log('向下')
+                    defaules.gestureDown.call(le, e)
+                    } else {
+                        console.log('向上')
+                    defaules.gestureUp.call(le, e)
+                    }
+                   
+               }
+            }
+                
+            isMove = false;
+        })
+       }
+       var html = document.querySelector('html');
+       var box = document.getElementById('box');
+       gesture(box, {
+        gestureLeft: function () {
+            console.log('左')
+            console.log(this)
+        },
+        gestureRight: function () {
+            console.log('右')
+        },
+        gestureDown: function () {
+            console.log('下')
+        },
+        gestureUp: function () {
+            console.log('上')
+        },
+        drag: function (e) {
+            this.style.left = e.touches[0].pageX - e.info.disX + 'px';
+            this.style.top = e.touches[0].pageY - e.info.disY + 'px';
+        }
+       })
+    </script>
+</body>
+</html>
