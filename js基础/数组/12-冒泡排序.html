@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var num1 = 10;
+        var num2 = 20;
+        var temp = num1; //  temp   10  
+        num1 = num2; //  num1 20 
+        num2 = temp; // num2  10
+
+        // // var arr = [5, 4, 3, 2, 1];
+        // var arr = [1, 10, 4, 24, 100, 34];
+        // // 外层的for 来控制 我们趟 数   5个数字（arr.length)   我们 换 4趟  (arr.length - 1)  
+        // for (var i = 0; i < arr.length - 1; i++) {
+        //     // 里面for 控制 每行 交换几次    存在的关系 length - i - 1
+        //     for (var j = 0; j < arr.length - i - 1; j++) {
+        //         // 判断
+        //         if (arr[j] < arr[j + 1]) {
+        //             // 里面交换数据就好了
+        //             var temp = arr[j];
+        //             arr[j] = arr[j + 1];
+        //             arr[j + 1] = temp;
+        //         }
+        //     }
+        // }
+        // console.log(arr);
+
+        // 冒泡排序
+
+        var arr = [1, 10, 4, 24, 100, 34];
+        // 外层  5 个数 走 4趟  长度 -1 
+        for (var i = 0; i < arr.length - 1; i++) {
+            //  里面控制 for  每趟  交换的次数 
+            for (var j = 0; j < arr.length - i - 1; j++) {
+                // 交换 
+                if (arr[j] > arr[j + 1]) {
+                    // 第三方变量
+                    var temp = arr[j]; // 保存第一个数据 5 给temp  5
+                    arr[j] = arr[j + 1]; // 把 第二个数  给 第一个变量  arr[j]  4
+                    arr[j + 1] = temp; // arr[j+1] 就是 5
+                }
+            }
+        }
+        console.log(arr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

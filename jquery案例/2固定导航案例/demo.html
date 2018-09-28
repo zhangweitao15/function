@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+    
+    img {
+      vertical-align: top;
+    }
+    
+    .main {
+      margin: 0 auto;
+      width: 1000px;
+      margin-top: 10px;
+    }
+    
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <script src="../jquery-1.12.4.min.js"></script>
+  <script>
+    $(function(){
+
+      var $topPart = $("#topPart"),
+       $navBar = $("#navBar"),
+       $mainPart = $("#mainPart");
+
+      //1 给window设置滚动事件
+      $(window).scroll(function(){
+        //2 检测页面卷曲高度与顶部盒子的高度之间的关系
+        if($(this).scrollTop() > $topPart.height()){
+          //3 设置导航盒子定位，添加fixed类名即可
+          $navBar.addClass("fixed");
+
+          //5 发现定位脱离标准流，可以设置主题盒子的marginTop
+          $mainPart.css("marginTop", $navBar.height() + 10);
+
+        }else{
+          //4 将导航的定位类名移除
+          $navBar.removeClass("fixed");
+          $mainPart.css("marginTop", 10);
+        }
+      });
+
+    })
+  </script>
+</head>
+<body>
+<div class="top" id="topPart">
+  <img src="images/top.png" alt=""/>
+</div>
+<div class="nav" id="navBar">
+  <img src="images/nav.png" alt=""/>
+</div>
+<div class="main" id="mainPart">
+  <img src="images/main.png" alt=""/>
+</div>
+</body>
+</html>

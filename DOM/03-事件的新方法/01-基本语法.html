@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>你好</h1>
+    <ul>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+    </ul>
+    <button>click</button>
+
+    <script>
+        var btn = document.querySelector( 'button' );
+
+        // 回忆
+        // btn.onclick = function () {};
+        
+        // 语法:
+        // btn.addEventListener( 'click', func )
+
+        btn.addEventListener( 'click', function () {
+            alert( '我被点击了' ) ;
+        } );
+        
+        // 这个语法兼容: onxxxxx = function ... 的语法
+
+        btn.addEventListener( 'click', function () {
+            alert( '我被点击了 第二次' ) ;
+        } );
+
+        btn.addEventListener( 'click', function () {
+            alert( '第三次解除' );
+        } );
+    </script>
+</body>
+</html>

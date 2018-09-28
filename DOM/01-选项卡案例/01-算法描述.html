@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div data-id="0">1</div>
+    <div data-id="1">2</div>
+    <div data-id="2">3</div>
+
+    <script>
+        // 要求:
+        // 给 每一个 div 注册点击事件, 点击后打印出这个 div 在所有 div 中的序号
+        var divs = document.querySelectorAll( 'div' );
+        for ( var i = 0; i < divs.length; i++ ) {
+            divs[ i ].onclick = function () {
+                // 打印出 div 的序号
+                // alert( i );
+
+                // alert( this.innerHTML - 1 );
+
+                alert( this.getAttribute( 'data-id' ) );
+
+
+                // for ( var j = 0; j < divs.length; j++ ) {
+                //     if ( divs[ j ] == this ) {
+                //         break;
+                //     }
+                // }
+                // j 就是 序号
+
+            };
+        }
+
+    </script>
+</body>
+</html>

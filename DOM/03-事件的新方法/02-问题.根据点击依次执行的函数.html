@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>只点击一次</button>
+    <script>
+        var btn = document.querySelector( 'button' );
+
+
+        function func1() {
+            alert( '我是第一次被调用的函数' );
+        }
+
+        function func2() {
+            alert( '我才是第一次调用的函数, 你是假的' );
+        }
+        
+        function func3() {
+            alert( '我是, 我是, 我们找佛祖去评评理' );
+        }
+
+
+        var index = 0;
+
+        btn.addEventListener( 'click', function () {
+            switch( index ) {
+                case 0: func1(); break;
+                case 1: func2(); break;
+                case 2: func3(); break;
+            }
+            index++;
+            if ( index >= 3 ) index = 0;
+        } );
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>京东商城</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .slider {
+            height: 340px;
+            width: 790px;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .slider li {
+            position: absolute;
+            display: none;
+        }
+        
+        .slider li:first-child {
+            display: block;
+        }
+        
+        .arrow {
+            display: none;
+        }
+        
+        .slider:hover .arrow {
+            display: block;
+        }
+        
+        .arrow-left,
+        .arrow-right {
+            font-family: "SimSun", "宋体";
+            width: 30px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            margin-top: -30px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 60px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 30px;
+        }
+        
+        .arrow-left:hover,
+        .arrow-right:hover {
+            background-color: rgba(0, 0, 0, .5);
+        }
+        
+        .arrow-left {
+            left: 0;
+        }
+        
+        .arrow-right {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <ul>
+            <li>
+                <a href="#"><img src="images/1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/2.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/3.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/4.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/5.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/6.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/7.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/8.jpg" alt=""></a>
+            </li>
+        </ul>
+        <!--箭头-->
+        <div class="arrow">
+            <span class="arrow-left">&lt;</span>
+            <span class="arrow-right">&gt;</span>
+        </div>
+    </div>
+    <script src="../jquery-1.12.4.min.js"></script>
+    <script>
+        $(function() {
+            // 声明一个变量，保存当前显示的li的下标
+            var index = 0,
+                $lis = $('li'),
+                len = $lis.length;
+
+            // 右按钮功能：
+            $('.arrow-right').click(function() {
+                // 设置index加1
+                index++;
+                // 检测，如果当前index的取值超出了最大下标值
+                if (index > len - 1) {
+                    // 设置index为0，显示第一张
+                    index = 0;
+                }
+                // 根据index设置对应的li渐入，其余元素渐出
+                $lis.eq(index).stop().fadeIn(1000).siblings().stop().fadeOut(1000);
+            });
+
+            // 左按钮功能：
+            $('.arrow-left').click(function() {
+                index--;
+                if (index < 0) {
+                    index = len - 1;
+                }
+                $lis.eq(index).stop().fadeIn(1000).siblings().stop().fadeOut(1000);
+            });
+
+
+        });
+    </script>
+
+</body>
+
+</html>

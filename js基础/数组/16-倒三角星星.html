@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 一行上打印星星的个数 =   用 10 减去  行数   i   （10 - i ）
+        var str = ''; // 空字符串
+        // 外层for 负责 可以打印  行数 
+        for (var i = 1; i <= 9; i++) {
+            // 里面的for 负责的是 一行  打印   n 个 星星
+            for (var j = 1; j <= 10 - i; j++) {
+                str = str + '☆';
+            }
+            str = str + '\n';
+        }
+        console.log(str);
+        // j  起始值 从  行数 开始  到  9    就是打印的个数 
+        var str = ''; // 空字符串
+        // 外层for 负责 可以打印  行数 
+        for (var i = 1; i <= 9; i++) {
+            // 里面的for 负责的是 一行  打印   n 个 星星
+            for (var j = i; j <= 9; j++) {
+                str = str + '☆';
+            }
+            str = str + '\n';
+        }
+        console.log(str);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

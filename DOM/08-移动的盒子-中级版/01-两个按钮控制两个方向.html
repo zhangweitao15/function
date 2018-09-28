@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        .box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <button class="toRight">向右移动( 800 )</button>
+    <button class="toLeft">向左移动( 100 )</button>
+
+    <div class="box"></div>
+
+    <script>
+      
+
+        var toleft = document.querySelector( '.toLeft' );
+        var toright = document.querySelector( '.toRight' );
+        var box = document.querySelector( '.box' );
+        var intervalId ;
+
+        toright.onclick = function () {
+            clearInterval( intervalId );
+
+            intervalId = setInterval( function () {
+                var left = parseInt( box.style.left || getComputedStyle( box ).left );
+                // 向右
+                left += 5;
+
+                if ( left >= 800 ) {
+                    box.style.left = 800 + 'px';
+                    clearInterval( intervalId );
+                } else {
+                    box.style.left = left + 'px';
+                }
+
+            }, 20 ); // 50Hz
+        };
+
+        toleft.onclick = function () {
+            clearInterval( intervalId );
+
+            intervalId = setInterval( function () {
+                var left = parseInt( box.style.left || getComputedStyle( box ).left );
+                // 向右
+                left -= 5;
+
+                if ( left <= 100 ) {
+                    box.style.left = 100 + 'px';
+                    clearInterval( intervalId );
+                } else {
+                    box.style.left = left + 'px';
+                }
+
+            }, 20 ); // 50Hz
+        };
+    
+    
+    </script>
+</body>
+</html>

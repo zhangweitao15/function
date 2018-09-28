@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        .box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    
+    </style>
+</head>
+<body>
+    <button>开启</button>
+
+    <div class="box"></div>
+
+    <script>
+        // 思路:
+        // 要将盒子移动到 left 为 800 px 的位置
+        // 就是相当于连续点击让盒子右移
+        // 取出盒子当前的 left 值, 将其累加一个数值 ( 10 )
+        // 再赋值回去即可让盒子移动
+        var box = document.querySelector( '.box' );
+        var btn = document.querySelector( 'button' );
+        btn.onclick = function () {
+
+            // 在点击按钮后, 开启计时器, 在计时器中让盒子右移
+
+            setInterval( function () {
+                // 每秒钟会执行 20 次
+                var left = parseInt( box.style.left || getComputedStyle( box ).left );
+                left += 10;
+                box.style.left = left + 'px';
+                
+            }, 50 );
+
+        };
+    
+    
+    </script>
+</body>
+</html>

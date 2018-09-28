@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var str = ''; // 空字符串
+        // 外层for 负责 可以打印 3行 
+        for (var j = 1; j <= 3; j++) {
+            // 里面的for 负责的是 一行  打印   3个 星星
+            for (var i = 1; i <= 3; i++) {
+                str = str + '☆';
+            }
+            str = str + '\n';
+        }
+        console.log(str);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

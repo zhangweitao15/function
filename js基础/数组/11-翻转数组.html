@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //  ['red', 'green', 'blue', 'pink', 'purple']
+        // 两个数组 新 的 和 旧的  
+        // 翻转  就是把 旧数组的 最后一个 给 新数组的 第 0 个 
+        var arr = ['red', 'green', 'blue', 'pink', 'purple'];
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            // 就是把 旧数组的 最后一个 给 新数组的 第 0 个 
+            newArr[i] = arr[arr.length - i - 1];
+        }
+        console.log(newArr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

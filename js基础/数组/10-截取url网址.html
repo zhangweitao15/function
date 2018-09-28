@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var url = 'http://www.itheima.com/login?name=zs&age=18';
+
+        function getParams(url) {
+            // 我们先找到 ？   indexOf('?')
+            var index = url.indexOf('?') + 1;
+            // console.log(index);
+            // name=zs&age=18
+            //2 截取字符串 从 ？ 开始 接到后面 substr(开始的位置) 
+            var params = url.substr(index)
+                // console.log(params);
+                // name=zs&age=18 得到了
+
+            // 3. 继续拆分 字符串  分开 split
+            var arr = params.split('&');
+            console.log(arr); // ["name=zs", "age=18"]
+            var o = {};
+            // 遍历循环
+            for (var i = 0; i < arr.length; i++) {
+
+                var newArr = arr[i].split('=');
+                console.log(newArr); // ['name', 'zs']
+                // o.name = 'zs'
+                o[newArr[0]] = newArr[1];
+            }
+            return o;
+        }
+        console.log(getParams(url));
+    </script>
+</head>
+
+<body>
+    <form action="demo.php" method="get">
+        用户名： <input type="text" name="username" id=""> <br><br> 密码： <input type="password" name="pwd" id="">
+        <input type="checkbox" name="sex" id="" value="男">
+        <input type="submit" value="点击我">
+    </form>
+</body>
+
+</html>

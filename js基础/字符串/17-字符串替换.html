@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var str = '如果我是dj,你会爱我吗,强哥上课很激情';
+        var s = str.replace('dj', 'DJ');
+        var ss = str.replace('激情', '**');
+        console.log(s);
+        console.log(ss);
+
+        // 把字符串中所有的o替换成!
+        // var str = 'abcoefoxyozzopp';
+        // // replace 每次只能替换一个，所以我们需要 循环 遍历 
+        // while (str.indexOf('o') !== -1) {
+        //     // 这句话很关键  'abc!efoxyozzopp'
+        //     str = str.replace('o', '!');
+        // }
+        // console.log(str);
+
+        var str = 'abcoefoxyozzopp';
+        // 只要能找到 o 就循环   indexOf('o')  返回的数字    charAt(0)
+        while (str.indexOf('o') !== -1) {
+            // 找到一个替换一个 
+            str = str.replace('o', '-');
+        }
+        console.log(str);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

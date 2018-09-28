@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 这个函数 需要接受  年份  能被4整数并且不能被100整数，或者能被400整数]
+        function getRun(year) {
+            // flag 普通的变量 用来存储 是 不是 闰年的
+            // 默认的是 平年 
+            var flag = false;
+            if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
+                flag = true;
+            }
+            return flag;
+        }
+        console.log(getRun(2018));
+        console.log(getRun(2016));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

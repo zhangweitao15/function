@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #time {
+            color: pink;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="time"></div>
+</body>
+<script>
+    // 做一个倒计时效果    假如到   11月 11号 
+    // 核心原理    用我们 结束的日期 -  现在的日期  就是剩下的日期  
+    // var date = new Date();  现在的时间
+    //   var date1 = new Date('2018');  输入的时间
+    // console.log(date);
+
+    function getCountTime(endTime) {
+        // 声明变量
+        var d, h, m, s;
+        // 剩余的时间  时间减去时间 得到的是  毫秒数     -- 转换为秒数    
+        // countTime  就是剩余的秒数
+        var countTime = parseInt((new Date(endTime) - new Date()) / 1000);
+        // console.log(countTime);
+        d = parseInt(countTime / 60 / 60 / 24); // 计算天数
+        h = parseInt(countTime / 60 / 60 % 24) // 计算小时
+        m = parseInt(countTime / 60 % 60); // 计算分数 
+        s = parseInt(countTime % 60); // 计算当前秒数  
+        return '距离光棍节还有' + d + '天' + h + '小时' + m + '分' + s + '秒';
+    }
+    console.log(getCountTime('2018-11-11 17:30:00'));
+    console.log(getCountTime('2018-5-31 17:30:00'));
+
+    setInterval(function() {
+        time.innerHTML = getCountTime('2018-11-11 17:30:00');
+    }, 1000);
+</script>
+
+</html>

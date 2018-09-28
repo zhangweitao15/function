@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>五角星评分案例</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .comment {
+      font-size: 40px;
+      color: teal;
+    }
+    
+    .comment li {
+      float: left;
+    }
+    
+    ul {
+      list-style: none;
+    }
+  </style>
+  <script src="../jquery-1.12.4.min.js"></script>
+  <script>
+    $(function () {
+      var kXin = '☆';
+      var sXin = '★';
+
+      // 1 li的移入效果
+      $('li').on('mouseover', function () {
+        // 设置当前li和前面的li为实心，同时设置后面的元素为空心
+        //  end() 用于获取上一次操作的对象
+        $(this).text(sXin).prevAll().text(sXin).end().nextAll().text(kXin);
+      });
+
+      // 2 移除ul效果
+      $('ul').on('mouseleave', function () {
+        // 设置所有li为空心
+        $(this).children().text(kXin);
+
+        // --- 添加操作：找到具有active类名的元素
+        $(this).children('.active').text(sXin).prevAll().text(sXin);
+      });
+
+
+      // 3 点击功能
+      $('li').on('click', function () {
+        // 需要给当前li设置一个标记，在移出时进行检测
+        // 还需要给上次点过的元素移除类名
+        $(this).addClass('active').siblings().removeClass('active');
+      });
+
+    });
+  </script>
+</head>
+
+<body>
+<ul class="comment">
+  <li>☆</li>
+  <li>☆</li>
+  <li>☆</li>
+  <li>☆</li>
+  <li>☆</li>
+</ul>
+</body>
+
+</html>

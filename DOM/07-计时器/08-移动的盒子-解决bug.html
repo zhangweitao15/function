@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        .box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <button>开启</button>
+
+    <div class="box"></div>
+
+    <script>
+        // 思路:
+        // 要将盒子移动到 left 为 800 px 的位置
+        // 就是相当于连续点击让盒子右移
+        // 取出盒子当前的 left 值, 将其累加一个数值 ( 11 )
+        // 再赋值回去即可让盒子移动
+        var end = 800;
+
+        var box = document.querySelector( '.box' );
+        var btn = document.querySelector( 'button' );
+        var intervalId ;
+        btn.onclick = function () {
+
+            clearInterval( intervalId );
+
+            // 在点击按钮后, 开启计时器, 在计时器中让盒子右移
+
+            intervalId = setInterval( function () {
+                // 每秒钟会执行 20 次
+                var left = parseInt( box.style.left || getComputedStyle( box ).left );
+                left += 5;
+
+                // 判断应该写在这里, 如果达到了目标就设置 left 的值为 目标值
+                // 否则继续移动
+                if ( left >= end ) {
+                    box.style.left = end + 'px';
+                    
+                    clearInterval( intervalId );
+                    // alert( '您已安全抵达 ...' );
+                } else {
+                    box.style.left = left + 'px';
+                }
+            }, 16.67 );
+
+            // 点击一下是 一秒钟 移动 5 像素
+            // 如果快速的点击 两次 就接近与 每秒钟移动 10 个像素
+
+        };
+    
+    
+    </script>
+</body>
+</html>

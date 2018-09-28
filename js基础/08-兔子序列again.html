@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //  1，1，2，3，5，8，13，21
+        //  前面两项 相加 得到 第三项 
+        //  n1   +  n2  =  n3  
+        var n1 = 1;
+        var n2 = 1;
+        var n3 = 0;
+
+        // 问的是 第 n 个     88 个 ？  循环  i 就是 几个   循环几次
+        for (var i = 3; i <= 9; i++) {
+            // n3 是 第n个数 的 数字 多少
+            n3 = n1 + n2;
+            n1 = n2;
+            n2 = n3;
+        }
+        console.log(n3);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

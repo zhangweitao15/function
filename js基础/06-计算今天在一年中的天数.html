@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 输入某年某月某日，判断这一天是这一年的第几天？
+        // 2018,1,2     2天     2018. 2.1       32       2018.3.1    
+        // 比如要输入年份  因为 有闰年 和 平年    闰年的2月份是  29 天    平年的2月 28天 。
+        // 月份不一样  1 3 5 7 8 1 0 1 2   31天   4 6 9 11  是 30天   2月份
+        // 1.   前面几个月的总天数     +     不断的相加  for 循环 
+        // 2.   当月的天数   
+        // 获得天数的函数思密达
+        function getDays(year, month, day) {
+            // days 存储的总的天数 
+            // 先把当月的天数 给 days  计算 当月的天数 
+            var days = day;
+            // 月份可能很多 所以我们需要for 循环
+            for (var i = 1; i < month; i++) {
+                switch (i) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        days += 31;
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        days += 30;
+                        break;
+                    case 2:
+                        // 如果是 闰年  += 29 
+                        // 否则是 平年  +=28
+                        if (getRun(year)) { // 函数可以再次调用其他函数的
+                            days += 29;
+                        } else {
+                            days += 28;
+                        }
+                        break;
+                }
+            }
+            return days;
+        }
+
+        function getRun(year) {
+            // flag 普通的变量 用来存储 是 不是 闰年的
+            // 默认的是 平年 
+            var flag = false;
+            if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
+                flag = true;
+            }
+            return flag;
+        }
+        console.log(getDays(2018, 2, 1));
+        console.log(getDays(2018, 3, 1));
+        console.log(getDays(2018, 5, 27));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

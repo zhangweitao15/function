@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+        .box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <button class="toRight">向右移动( 800 )</button>
+    <button class="toLeft">向左移动( 100 )</button>
+
+    <div class="box"></div>
+
+    <script>
+      
+
+        var toleft = document.querySelector( '.toLeft' );
+        var toright = document.querySelector( '.toRight' );
+        var box = document.querySelector( '.box' );
+        var intervalId ;
+
+
+        // 需要一个函数, 将一个 盒子 移动到 指定位置( 要么左边, 要么右边 )
+        function move( box, target ) {
+            // 1. 怎么判断 + 或 -
+            // direction
+            var fangXiang = parseInt( box.style.left || getComputedStyle( box ).left ) < target
+                            ? 1 
+                            : -1;
+            
+            var intervalId = setInterval( function () {
+                var left = parseInt( box.style.left || getComputedStyle( box ).left );
+                // 向右
+                left += fangXiang * 5;
+
+                // 2. 考虑方向后, 就需要考虑判断的条件
+                // 向右 就 left >= target
+                // 向左 就 left <= target
+               
+                if ( Math.abs( left - target ) <= 2 * 5 ) {
+                    // 向左
+                    box.style.left = target + 'px';
+                    clearInterval( intervalId );
+                } else {
+                    box.style.left = left + 'px';
+                }
+
+            }, 20 ); // 50Hz
+            return intervalId; 
+            // 我们需要在外面 清除计时器, 如果设计的时候 将清除的逻辑封装到了函数里, 
+            // 就可以不考虑返回值
+        }
+
+
+
+        toright.onclick = function () {
+            clearInterval( intervalId );
+
+            intervalId = move( box, 800 );
+        };
+
+        toleft.onclick = function () {
+            clearInterval( intervalId );
+
+            intervalId = move( box, 100 );
+        };
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    ul {
+      list-style: none
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    div {
+      position: relative;
+      width: 1200px;
+      height: 400px;
+      margin: 50px auto;
+      border: 1px solid red;
+      overflow: hidden;
+    }
+    
+    div li {
+      width: 1200px;
+      height: 400px;
+      /*float: left;*/
+      position: absolute;
+    }
+    
+    div ul {
+      width: 1200px;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <ul>
+    <li style="background-image:url(images/1.jpg);left:0px;"></li>
+    <li style="background-image:url(images/2.jpg);left:240px;"></li>
+    <li style="background-image:url(images/3.jpg);left:480px;"></li>
+    <li style="background-image:url(images/4.jpg);left:720px;"></li>
+    <li style="background-image:url(images/5.jpg);left:960px;"></li>
+  </ul>
+</div>
+<script src="../jquery-1.12.4.min.js"></script>
+<script>
+  $(function () {
+  	var $lis = $('li');
+  	$lis.mouseenter(function () {
+  		var index = $(this).index();
+  		$lis.each(function (i, e) {
+  			if (i <= index) {
+  				$(e).stop().animate({left : i * 100});
+  			} else {
+  				$(e).stop().animate({left : i * 100 + 700});
+  			}		
+  		});
+  	});
+
+  	$('#box').mouseleave(function () {
+  		$lis.each(function (i, e) {
+  			$(e).stop().animate({left : i * 240});
+  		});
+  	});
+  });
+</script>
+</body>
+</html>

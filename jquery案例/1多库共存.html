@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="test.js"></script>
+	<script src="jquery-1.12.4.min.js"></script>
+	<script>
+		// jQuery是一个JavaScript库，除了jQuery以外还会有许多其他的库
+		// jQuery具有两个顶级对象，$ jQuery，有可能其他的库会对这些变量名称进行占用
+
+		// 由于test.js与jQuery均使用了$这个变量，只有后引入的jQuery可以使用，而test这个库无法使用了
+		
+		// jQuery中提供了一个方法用于放弃对顶级对象名称的使用权
+		//   并且返回值使用权，可以设置给一个变量，这个变量可以使用jQuery的所有功能
+		// noConflict(); 
+		/*var $1 = $.noConflict();
+		console.log($);
+		console.log($1 === jQuery);*/ // true,意味着可以使用$1来代替原始的$
+
+		// 上面的用法作为了解，知道即可，通常不会遇到。
+
+	
+		// 我们发现使用jQuery变量调用noConflict()可以设置新的使用权，但是旧的无法放弃
+		/*var jQuery1 = jQuery.noConflict();
+		console.log(jQuery1, jQuery);*/
+
+
+		// 下面是修改后的内容：
+		console.log($, jQuery);
+		// 使用noConflict方法不传参时可以放弃对$的使用，传入参数true，可以放弃对$和jQuery的使用
+		var $1 = $.noConflict(true);
+		console.log($, jQuery, $1);
+
+	</script>
+</body>
+</html>

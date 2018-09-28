@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <!--版心-->
+    <div class="container">
+        <!--tab切换模块-->
+        <div class="tab">
+            <!--切换按钮-->
+            <ul class="tab-control">
+                <li class="active">疯狂抢购</li>
+                <li>热卖推荐</li>
+                <li>猜你喜欢</li>
+                <li>新品上架</li>
+                <li>整箱特卖</li>
+            </ul>
+            <!--切换项-->
+            <div class="tab-content" id="tab_content">
+                <div class="tab-content-item active">
+                    <img src="img/01.bmp" />
+                </div>
+                <div class="tab-content-item">
+                    <img src="img/02.bmp" />
+                </div>
+                <div class="tab-content-item">
+                    <img src="img/03.bmp" />
+                </div>
+                <div class="tab-content-item">
+                    <img src="img/04.bmp" />
+                </div>
+                <div class="tab-content-item">
+                    <img src="img/05.bmp" />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // 思路:
+        // 1> 找到 tab-control 下的所有 li 标签, 注册点击事件
+        // 2> 在事件处理函数中 移除其他所有的 li 的 className 中的 active
+        //      同时添加 active 到 当前点击的 li 中的 className 
+        // 3> 需要找到 当前 li 在所有 li 中的序号( 可以在页面一开始的时候利用 自定义属性记录序号 )
+        // 4> 根据序号找到 tab_content 里面的 大 div
+        //      设置所有的 大 div 的 className 中移除 active
+        //      设置当前序号对应法 大盒子 里面的 className 中添加 active
+
+
+        // 1) 初始化 序号
+        var lis = document.querySelectorAll('.tab-control > li');
+        var divs = document.querySelectorAll('.tab-content > div');
+
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].setAttribute('data-id', i);
+        }
+
+
+        // 2) 给所有的 li 注册事件
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onclick = function() {
+                // 3) 处理小盒子的点击
+                for (var j = 0; j < lis.length; j++) {
+                    removeClass(lis[j], 'active');
+                }
+                // 设置 当前按钮的 className 中添加 一个 active
+                addClass(this, 'active');
+                // 存在一个假设: className 中可能存在其他类样式
+
+
+
+
+
+                // 4) 处理大盒子的点击
+                for (var j = 0; j < divs.length; j++) {
+                    removeClass(divs[j], 'active');
+                }
+
+                // 设置与 点击 的小按钮 序号相同的 大盒子的 active
+                var index = this.getAttribute('data-id') - 0;
+                addClass(divs[index], 'active');
+            };
+        }
+
+        // 单一原则
+        function removeClass(dom, className) {
+            var cnames = dom.className.split(' ');
+            var index = cnames.indexOf(className);
+            if (index > -1) {
+                cnames.splice(index, 1);
+            }
+            dom.className = cnames.join(' ');
+        }
+
+        function addClass(dom, className) {
+            dom.className += ' ' + className;
+        }
+    </script>
+</body>
+
+</html>

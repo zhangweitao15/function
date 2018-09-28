@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+    
+    img {
+      vertical-align: top;
+    }
+    
+    .main {
+      margin: 0 auto;
+      width: 1000px;
+      margin-top: 10px;
+    }
+    
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <script src="../jquery-1.12.4.min.js"></script>
+  <script>
+    $(function () {
+      // 1 页面滚动时获取页面的卷曲高度
+      $(window).scroll(function () {
+        // 2 使用卷曲高度与顶部盒子高度进行比较
+        if ($(this).scrollTop() > $('#topPart').height()) {
+          // 3 设置导航部分定位
+          $('#navBar').addClass('fixed');
+          // 由于定位后脱离标准流，可以通过给底部设置marginTop的方式避免显示问题
+          $('#mainPart').css('marginTop', 10 + $('#navBar').height());
+        } else {
+          // 4 移除导航部分定位
+          $('#navBar').removeClass('fixed');
+          $('#mainPart').css('marginTop', 10);
+        } 
+      });
+    });
+  </script>
+</head>
+<body>
+<div class="top" id="topPart">
+  <img src="images/top.png" alt=""/>
+</div>
+<div class="nav" id="navBar">
+  <img src="images/nav.png" alt=""/>
+</div>
+<div class="main" id="mainPart">
+  <img src="images/main.png" alt=""/>
+</div>
+</body>
+</html>

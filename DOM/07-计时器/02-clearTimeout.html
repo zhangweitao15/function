@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn1">开启</button>
+    <button class="btn2">关闭</button>
+
+    <script>
+        var timeoutId;
+
+        document.querySelector( '.btn1' ).onclick = function () {
+            console.log( '定时炸弹将会在 5 秒后爆炸' );
+            // 语法: setTimeout( 函数, 等待的毫秒 );
+            timeoutId = setTimeout( function () {
+                console.log( '炸弹爆炸了 ...' );
+            }, 5000 );
+        };
+    
+        document.querySelector( '.btn2' ).onclick = function () {
+            // 语法: clearTimeout( 延时器ID )
+            clearTimeout( timeoutId );
+            console.log( '炸弹拆除完成' );
+        };
+
+    </script>
+</body>
+</html>

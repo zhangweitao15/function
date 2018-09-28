@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>click</button>
+
+    <script>
+        document.querySelector( 'button' ).onclick = function () {
+            var count = 0;
+            var intervalId = setInterval( function () {
+                console.log( count );
+                if ( count >= 2 ) {
+                    clearInterval( intervalId );
+                    console.log( '---------------- 清除计时器 ------------------' );
+                    return;
+                    // return 一般用法有两个
+                    // 1> 后面跟一个数据, 表示函数的返回值
+                    // 2> return 表示结束函数, 即函数后面的代码不再执行
+                }
+                console.log( '函数内的第二句话' );
+                console.log( '函数内的第三句话' );
+                console.log( '函数内的第四句话' );
+                console.log( '' );
+                count++;
+            }, 3000 );
+
+        };
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归深拷贝</title>
+</head>
+<body>
+    <script>
+        // var arr = [1, 5, [1, 8, 9 ,1], 6, 98, 5, 2, 6, 5, [1, 9, 9, 5, 2, 5, 6]];
+        // function copy(arr) {
+        // }
+        // 计算数列
+        var obj = {
+            name: 'jack',
+            age: 18,
+            aiHao: {
+                qiMa: '我喜欢骑大白马',
+                swim: '我喜欢自由泳',
+                daQiu: {
+                    lanQiu: '因为喜欢看NBA，所以也喜欢打篮球',
+                    zuQiu: '我喜欢c罗，所以也喜欢踢足球'
+                }
+            },
+            arr: [1, 2, 3]
+        };
+       var obj1 = {};
+
+       function deepCopy(obj, obj1) {
+            for (var k in obj) {
+                if (obj[k] !== 'object' || obj[k] === null) {
+                    obj1[k] = obj[k];
+                } else {
+                    obj1[k] = obj[k].constructor = Array ? [] : {}; 
+                    deepCopy(obj[k], obj1[k]);
+                }
+            }
+       }
+       deepCopy(obj, obj1);
+       console.log(obj, obj1);
+       
+    </script>
+    
+</body>
+</html>

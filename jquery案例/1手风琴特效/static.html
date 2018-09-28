@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    ul {
+      list-style: none
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    div {
+      position: relative;
+      width: 1200px;
+      height: 400px;
+      margin: 50px auto;
+      border: 1px solid red;
+      overflow: hidden;
+    }
+    
+    div li {
+      width: 1200px;
+      height: 400px;
+      /*float: left;*/
+      position: absolute;
+    }
+    
+    div ul {
+      width: 1200px;
+    }
+  </style>
+</head>
+<body>
+<div id="box">
+  <ul>
+    <li style="background-image:url(images/1.jpg);left:0px;"></li>
+    <li style="background-image:url(images/2.jpg);left:240px;"></li>
+    <li style="background-image:url(images/3.jpg);left:480px;"></li>
+    <li style="background-image:url(images/4.jpg);left:720px;"></li>
+    <li style="background-image:url(images/5.jpg);left:960px;"></li>
+  </ul>
+</div>
+<script src="../jquery-1.12.4.min.js"></script>
+<script>
+  // 通过观察我们发现：
+  //   1 鼠标移入某个li时，运动分为两组
+  //      1.1 当前元素和前面的元素的left运动为  i * 100
+  //      1.2 后续元素的left运动为  i * 100 + 700
+  //   2 鼠标移出时（移出大盒子），设置每个元素的left为原始位置
+
+  // 实现步骤：
+  var $lis = $('li');
+  $('li').mouseover(function () {
+    // 保存当前元素的下标值
+    var index = $(this).index();
+    // 由于不同元素的运动位置是不同的，就无法利用隐式迭代效果了
+    for (var i = 0; i < $lis.length; i++) {
+      // 使用i与index进行比较
+      if (i <= index) {
+        $($lis[i]).stop().animate({left : i * 100});
+      } else {
+        $($lis[i]).stop().animate({left : i * 100 + 700});
+      }
+    }
+  });
+
+  // 由于内部是多个li的移入移出操作，为了避免冒泡出现问题，使用mouseleave即可
+  $('#box').mouseleave(function () {
+    for (var i = 0; i < $lis.length; i++) {
+      $($lis[i]).stop().animate({left : i * 240});
+    }
+  });
+
+</script>
+
+
+
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+
+<script>
+  
+  // 当我们对jQuery对象操作时，如果需要对内部的所有元素进行统一操作，直接利用隐式迭代设置即可
+  // $('.box').css('width', 100);
+
+  // 当我们设置的操作时不同的，就无法使用隐式迭代了
+  // 例如第一个div宽度为 100，第二个宽度为200，第三个。。。。
+  /*for (var i = 0; $('.box').length; i++) {
+    // 设置宽度为i*100...
+  }*/
+
+
+  // 例如，每个div设置的宽度不同，同时又没有规律
+  //  第一个宽度为256，第二个为189，第三个为341，第四个为888
+  /*var arr = [256, 189, 341, 888];
+  for (var i = 0; $('.box').length; i++) {
+    // 设置宽度为arr[i]
+  }*/
+
+</script>
+</body>
+</html>

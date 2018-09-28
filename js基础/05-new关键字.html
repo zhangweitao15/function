@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // function add(n1, n2) {
+        //     console.log(n1 + n2);
+        // }
+        // add(1);
+
+        // function fn() {
+
+        // }
+        // console.log(fn());
+
+        // function fn() {
+        //     console.log(1);
+        //     return 2;
+        //     console.log(3);
+        // }
+        // console.log(fn())
+        //     (function() {})()
+
+
+        // var num;
+
+        // function fn() {
+        //     var num;
+        //     console.log(num);
+        //     num = 2;
+        // }
+        // num = 1;
+
+
+        // fn();
+        // console.log(num);
+
+
+
+        // function a() {
+        //     console.log(1);
+        // }
+
+        // function a() {
+        //     console.log(2);
+        // }
+        // a();
+        // a();
+
+        function Student(name, age) {
+
+            this.age = age;
+            this.name = name;
+            this.hi = function() {
+                alert('hi' + this.name);
+            }
+        }
+
+        // 调用  new 来调用
+        var leigg = new Student('李雷', 18);
+        console.log(leigg.name);
+        var hanmm = new Student('韩梅梅', 21);
+        console.log(hanmm.name);
+        // new 关键字 做了 4件事  
+        // 1. new 关键字首先创建了一个空对象 
+        // 2. 让this 全部指向这个对象 
+        // 3. 执行构造函数里面的代码   完成 属性和方法的赋值工作
+        // 4. 返回这个对象 。 所以 构造函数里面不需要return 也可以返回 new 帮我们做了
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

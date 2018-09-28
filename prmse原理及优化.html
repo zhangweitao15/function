@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function async1() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    resolve({a:1});
+                }, 3000)
+            })
+        }
+        function async2(data) {
+            console.log(data);
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    resolve({a:2});
+                }, 3000)
+            })
+        }
+        function done(data) {
+            console.log(data);
+        }
+        async1()
+        .then(async2)
+        .then(done);
+        /*
+            通过promse 的then方法可以保证代码的执行顺序
+            将一系列有序代码(做了多个事情, 多个事的执行粗腰保证顺序)
+            我们可以将不同的事情写在不同的函数中, 然后通过promise的then串联起来;
+        */
+   </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 判断一个字符串中出现次数最多的字符，统计这个次数
+        // charAt(0)  根据位置返回字符
+        var s = 'abcoefoxyozzopp';
+        // 先遍历 给每个字母都遍历一次   for
+        var o = {};
+        // o.uname = 'andy'  动态语言
+        for (var i = 0; i < s.length; i++) {
+            // 取出 s 字符里面的所有的字母
+            var item = s.charAt(i);
+            // 你有o 这个 a属性吗
+            if (o[item]) {
+                o[item]++;
+            } else {
+                o[item] = 1;
+            }
+        }
+        console.log(o);
+
+        //  遍历对象 求 最大值 和 那个 字母 
+        // 最大的数
+        var max = 0;
+        // 最多的字符
+        var char;
+        for (k in o) {
+            // k 属性名   o[k]  属性值
+            if (max < o[k]) {
+                max = o[k];
+                char = k;
+            }
+        }
+        console.log(max);
+        console.log(char);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

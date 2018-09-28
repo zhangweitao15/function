@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+      var arr = ['c', 'a', 'z', 'a', 'x', 'a', 'x', 'c', 'b'];
+      function unique (arr) {
+        return Array.from(new Set(arr))
+      }
+      console.log(unique(arr))
+      
+        // // 编写一个方法去掉一个数组的重复元素（重点案例必须掌握的)
+        // var arr = ['c', 'a', 'z', 'a', 'x', 'a', 'x', 'c', 'b'];
+        // // 思路跟我们昨天做的  统计 元素出现次数最多的那个 原理相同
+        // // 用对象的方式表示他们的次数
+        // var o = {};
+        // for (var i = 0; i < arr.length; i++) {
+        //     // var item = 'c';
+        //     var item = arr[i];
+        //     if (o[item]) {
+        //         o[item]++;
+        //         console.log(o[item]);
+                
+        //     } else {
+        //         o[item] = 1;
+        //     }
+        // }
+        // console.log(o);
+        // // 处理对象 筛选元素
+        // // 存放我们选出的内容元素
+        // var newArr = [];
+        // for (k in o) {
+        //     // 如果数字是1  二话不说直接保存 
+        //     // 查找newarr  如果新数组里面有了，就不要在加了
+        //     // newArr.indexOf(k) === -1 说明没找到
+        //     if (o[k] == 1 || newArr.indexOf(k) === -1) {
+        //         newArr.push(k);
+        //     }
+        // }
+        // console.log(newArr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>click</button>
+
+    <script>
+        document.querySelector( 'button' ).onclick = function () {
+
+            console.log( '1' );
+            console.log( '2' );
+            
+            // 语法: setTimeout( 函数, 等待的毫秒 );
+            setTimeout( function () {
+                console.log( '炸弹爆炸了 ...' );
+            }, 5000 );
+            // 这句代码相当于开启了一个延迟执行
+            
+
+            console.log( '3' );
+            console.log( '4' );
+
+        };
+    
+    </script>
+</body>
+</html>

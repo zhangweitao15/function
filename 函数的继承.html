@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Food(width, height, bgColor) {
+            this.width = width;
+            this.height= height;
+            this.bgColor = bgColor;
+        }
+        Food.prototype = {
+            init: function () {
+                console.log('初始化');
+            },
+            get: function () {
+                console.log('获取')
+            },
+            set: function () {
+                console.log('设置')
+            },
+            constructor: Food
+        }
+        function Gain (width, height, bgColor, map) {
+            this.map = map;
+            Food.call(this, width, height, bgColor);
+            
+        }   
+        Gain.prototype = new Food();
+        const fn = new Gain(20, 20, 'red', 'div');
+        console.log(fn);
+
+        const fn2 = new Gain(203, 203, 'red1', 'div1');
+        console.log(fn2);
+        fn2.init()
+        fn2.get();
+        fn2.set();
+        
+    </script>
+</body>
+</html>

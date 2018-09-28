@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding:0;
+    }
+    ul {
+      list-style: none;
+    }
+    i{
+      font-style: normal;
+    }
+    .box {
+      width: 600px;
+      border:1px solid #ccc;
+      margin:0 auto;
+      padding:20px;
+      text-align: center;
+    }
+    textarea {
+      resize: none;
+      width: 500px;
+      height: 150px;
+      font-size: 16px;
+    }
+    .control {
+      text-align: right;
+      padding-right: 50px;
+    }
+
+    .control i {
+      display: inline-block;
+      padding: 0 5px;
+    }
+    .control i.current {
+      color:red;
+    }
+    .control i.total {
+      color:#ccc;
+    }
+    .control button {
+      width: 100px;
+      height: 30px;
+    }
+    #commentList {
+      text-align: left;
+      width: 500px;
+      margin:0 auto;
+    }
+
+    #commentList li {
+      border-bottom: 1px dotted #ccc;
+      padding: 10px 0;
+      background-color: beige;
+
+    }
+    #commentList li div.del {
+      text-align: right;
+    }
+    #commentList li div.del span {
+      color:blue;
+      text-decoration:underline;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="box">
+    <textarea id="txt" placeholder="说点什么吧..." maxlength="300"></textarea>
+    <div class="control">
+      <span>
+        <i id="current" class="current">0</i>/<i class="total" id="total">200</i>
+      </span>
+      <button id="add">发表</button>
+    </div>
+    <ul id="commentList">
+      <li>
+        <div>测试标签</div>
+        <div class="del">
+          <span>删除</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script src="./common.js"></script>
+  <script>
+    
+    var txt = qs( '#txt' );
+    var current = qs( '#current' );
+    var total = qs( '#total' );
+    var add = qs( '#add' );
+    var list = qs( '#commentList' );
+
+    // 将重点放在创建与移除的逻辑中
+    // 点击 按钮( add ) 来创建 形如
+    /* 
+      <li>
+        <div>内容</div>
+        <div class="del">
+          <span>删除</span>
+        </div>
+      </li>
+    */
+    // 我们需要考虑 删除的事件. 我们只需要将事件注册给 父元素
+    // 只需要判断 触发事件的是 列表 中的 删除按钮, 即可触发事件的删除逻辑
+
+    // 由于 删除的事件不再 绑定到每一个列表项中, 因此, 直接可以在页面一开始的时候就注册事件
+    // 
+
+    list.onclick = function ( e ) {
+      var target = e.target;
+
+      // 必须保证 点击的是删除按钮
+      if ( target.innerHTML === '删除' ) {
+        // console.log( target );
+        // 处理删除逻辑
+        list.removeChild( target.parentElement.parentElement );
+      }
+    };
+
+    // 添加的逻辑上
+    add.onclick = function () {
+      var li = ce( 'li' );
+      var content = txt.value;
+
+      li.innerHTML = '<div>' + content + '</div><div class="del"><span>删除</span></div>';
+
+      list.appendChild( li );
+
+    };
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    // 1~10   [1,10]     
+    function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    // console.log(getRandom(10, 20));
+    // #ffff00
+    // 因为里面有数字和字母  这里需要借助一个 数组   数组里面装有  十六进制的 数字和字母 
+    // arr[20];
+
+    // var o = {};
+    // console.log(o.name);
+
+    function getColor() {
+        // 数组里面装有  十六进制的 数字和字母 
+        var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+        var str = '#';
+        // arr[15]  == f
+        // console.log(arr[getRandom(0, 15)]);
+        // 因为需要6个 所以循环
+        for (var i = 0; i < 6; i++) { // console.log(arr[getRandom(0, 15)]);
+            str = str + arr[getRandom(0, 15)];
+        }
+        return str;
+    }
+    // console.log(getColor());
+    box.style.backgroundColor = getColor();
+</script>
+
+</html>

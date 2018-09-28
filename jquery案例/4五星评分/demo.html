@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>五角星评分案例</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .comment {
+      font-size: 40px;
+      color: teal;
+    }
+    
+    .comment li {
+      float: left;
+    }
+    
+    ul {
+      list-style: none;
+    }
+  </style>
+  <script src="../jquery-1.12.4.min.js"></script>
+  <script>
+    $(function () {
+      var kXin = "☆";//空心的文本
+      var sXin = "★";//实心的文本
+      
+      //1 给每个li设置鼠标移入效果
+      //prev() next()
+      //prevAll() 前面所有的同级元素   nextAll() 后面所有的同级元素
+      $("li").mouseenter(function () {
+        //设置当前li和前面的li为实心，后面的li为空心
+        //$(this).text(sXin).prevAll().text(sXin);
+        //$(this).nextAll().text(kXin);
+        
+        //end方法，在调用后，可以返回上一次操作的对象
+        $(this).text(sXin).prevAll().text(sXin).end().nextAll().text(kXin);
+      });
+      
+      //当鼠标移出大盒子时，设置每个li内容为kXin
+      $(".comment").mouseleave(function () {
+        $(this).children().text(kXin);
+        
+        //后添加的操作：根据index的值找到某个标记的元素，设置这个元素和前面的元素为实心
+//        $(this).children().eq(index).text(sXin).prevAll().text(sXin);
+        $(this).children(".mark").text(sXin).prevAll().text(sXin);
+      });
+      
+      //当点击某个li时，对当前li的索引值进行记录
+//      var index;
+//      $("li").click(function () {
+//        index = $(this).index();
+//      });
+      
+      //点击某一个li时，给这个li添加一个类名
+      $("li").click(function () {
+        $(this).addClass("mark").siblings().removeClass("mark");
+      });
+      
+      
+    })
+  </script>
+</head>
+
+<body>
+<ul class="comment">
+  <li>☆</li>
+  <li>☆</li>
+  <li>☆</li>
+  <li>☆</li>
+  <li>☆</li>
+</ul>
+</body>
+
+</html>

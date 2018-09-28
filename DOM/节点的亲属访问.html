@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px dashed red;
+        }
+        
+        a {
+            display: block;
+        }
+        
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div>
+            <a>主菜单</a>
+            <div class="c c1 hide c2">
+                <a>子菜单</a>
+                <a>子菜单</a>
+                <a>子菜单</a>
+            </div>
+        </div>
+        <div>
+            <a>主菜单</a>
+            <div class="c hide c1 c2">
+                <a>子菜单</a>
+                <a>子菜单</a>
+                <a>子菜单</a>
+            </div>
+        </div>
+        <div>
+            <a>主菜单</a>
+            <div class="hide">
+                <a>子菜单</a>
+                <a>子菜单</a>
+                <a>子菜单</a>
+            </div>
+        </div>
+        <div>
+            <a>主菜单</a>
+            <div class="hide c0 c1 c2">
+                <a>子菜单</a>
+                <a>子菜单</a>
+                <a>子菜单</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1> 切入点: 在主菜单上注册点击事件, 然后再实现事件处理函数
+        var btns = document.querySelectorAll('.menu > div > a');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function() {
+                // 2> 在点击主菜单的时候 需要隐藏 其子菜单 或 显示子菜单
+                // 通过 this 找到 其子菜单, 就是 nextElementSibling
+                var submenu = this.nextElementSibling ;
+                console.log(submenu);
+                // 3> 控制它隐藏与显示
+                // 实际的算法逻辑
+                var classNames = submenu.className.split(' ');
+                // 获得子菜单的 class 值, 并以空格分隔
+                var index = classNames.indexOf('hide');
+                // 判断所有类样式中是否含有 hide 类样式
+                if (index > -1) {
+                    // 含有, 应该移除
+                    classNames.splice(index, 1); // 移除 hide
+                    submenu.className = classNames.join(' '); // 将剩下的类样式用空格连接成字符串
+                } else {
+                    // 没有, 应该添加
+                    classNames.push('hide');
+                    submenu.className = classNames.join(' ');
+                }
+            };
+        }
+        // 实现点击主菜单 子菜单显示再次点击隐藏(通过类样式实现)
+        // 1. 获取主菜单DOM节点
+        // 2. 给所有主菜单绑定点击事件
+        // 3. 处理类名
+        // 3.1 获取到主菜单类名 通过 split方法用 ' '将字符串换为数组
+        // 3.2 通过indexOf查找数组是否有hide并将结果 保存
+        // 4. 判断结果 当结果>-1 证明有,执行移除
+        // 5. 调用splice数组方法 将索引传入参数1 移除一个,
+        // 5.1 将处理结果 通过join转换为字符串设置到主菜单类样式中
+        // 6. 小于-1 说明没有hide进入else
+        // 6.1 调用push方法将hide追加到数组中
+        // 6.2 调用join方法将数组转换为字符串 添加到主菜单className中
+    </script>
+</body>
+
+</html>

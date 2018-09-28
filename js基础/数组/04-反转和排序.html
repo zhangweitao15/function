@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var arr = ['pink', 'red', 'blue'];
+        arr.reverse(); // 反转数组 修改原数组 
+        console.log(arr);
+        // 排序 
+        var arr = [2, 5, 9, 1, 4];
+        arr.sort(); // 无参数 按照 ascii 排列 
+        console.log(arr);
+        var arr = [12, 5, 9, 31, 4];
+        arr.sort();
+        console.log(arr); // 修改原数组
+
+        // 
+        var arr = [11, 34, 6, 9, 1];
+        // arr.sort(function(){})
+        // 公式
+        arr.sort(function(a, b) {
+            return a - b // 升序排序
+        })
+        console.log(arr);
+
+        var arr = [11, 34, 6, 9, 1];
+        // arr.sort(function(){})
+        // 公式
+        arr.sort(function(a, b) {
+            return b - a // 降序排序
+        })
+        console.log(arr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

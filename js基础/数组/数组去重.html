@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        var  arr = [1,2,3,4,1,2,3];
+// 使用foreach
+        var ary = [];
+        arr.forEach((v) => {
+                if (ary.indexOf(v) === -1) {
+                    ary.push(v)
+                }
+        });
+        console.log(ary)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //es6 set 方法 数组去重
+        // var ary = new Set(arr);
+        // console.log([...ary]);
+    // 过滤方法 数组去重
+        // var ary = arr.filter(function (v, i) {
+        //     return arr.indexOf(v) == i
+        // })
+        // console.log(ary)
+    // forEach 方法去重
+        // var ary = [];
+        // arr.forEach(function (v, i) {
+        //         if (ary.indexOf(v) === -1) {
+        //             ary.push(v);
+        //         }
+        // })
+        //      console.log(ary);
+
+     
+    </script>
+</body>
+</html>

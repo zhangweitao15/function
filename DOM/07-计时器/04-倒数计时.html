@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn1">开启</button>
+    <button class="btn2">关闭</button>
+
+    <script>
+        var intervalId;
+
+        document.querySelector( '.btn1' ).onclick = function () {
+           // 需要使用计时器来控制 倒数计时
+
+           var time = 5;
+
+           function func() {
+            //    if ( time <= 0 ) {
+            //        console.log( '爆炸了 ....' );
+            //        clearInterval( intervalId );
+            //        return;
+            //    }
+
+
+               console.log( '倒数计时: ' + time + ' 秒' );
+               time--;
+
+               // 判断一下, 事件是不是已经到 0 了
+               if ( time <= 0 ) {
+                   console.log( '爆炸了 ....' );
+                   clearInterval( intervalId );   // 告诉计时器不再继续调用函数了
+                   
+               }
+
+           }
+           func();
+           intervalId = setInterval( func, 1000 );
+        };
+    
+        document.querySelector( '.btn2' ).onclick = function () {
+            console.log( '拆除炸弹' );
+            clearInterval( intervalId );
+        };
+
+    </script>
+</body>
+</html>

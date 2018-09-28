@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>许愿墙</title>
+	<link rel="stylesheet" href="/css/index.css" />
+	<script src="/js/jquery-1.7.2.min.js"></script>
+	<script src="/js/index.js"></script>
+</head>
+<body>
+	<div id="top">
+		<span id="send"></span>
+	</div>
+	<div id="main">
+		{{each data}}
+		<dl class="paper a1">
+			<dt>
+				<span class="username">{{$value.username}}</span>
+			</dt>
+			<dd class="content">{{$value.content}}</dd>
+			<dd class="bottom">
+				<span class="time">
+					今天{{$imports.moment($value.publishDate).format('YYYY-MM-DD')}}
+					
+				</span>
+				<a href="" class="close"></a>
+			</dd>
+		</dl>
+		{{/each}}
+	</div>
+
+	<div id="send-form">
+		<p class="title">
+			<span>&nbsp;</span>
+			<a href="" id="close"></a>
+		</p>
+		<form action="" name="wish">
+			<p>
+				<label for="username">昵称：</label>
+				<input type="text" name="username" id="username"/>
+			</p>
+			<p>
+				<label for="content">愿望：(您还可以输入&nbsp;<span id="font-num">50</span>&nbsp;个字)</label>
+				<textarea name="content" id="content"></textarea>
+			</p>
+			<div id="phiz">
+				<img src="/images/phiz/zhuakuang.gif" alt="抓狂" />
+				<img src="/images/phiz/baobao.gif" alt="抱抱" />
+				<img src="/images/phiz/haixiu.gif" alt="害羞" />
+				<img src="/images/phiz/ku.gif" alt="酷" />
+				<img src="/images/phiz/xixi.gif" alt="嘻嘻" />
+				<img src="/images/phiz/taikaixin.gif" alt="太开心" />
+				<img src="/images/phiz/touxiao.gif" alt="偷笑" />
+				<img src="/images/phiz/qian.gif" alt="钱" />
+				<img src="/images/phiz/huaxin.gif" alt="花心" />
+				<img src="/images/phiz/jiyan.gif" alt="挤眼" />
+			</div>
+			<span id="send-btn"></span>
+		</form>
+	</div>
+	<script type="text/javascript">
+
+		var sendBtn = $('#send-btn');
+		var username = $('#username');
+		var content = $('#content')
+
+		sendBtn.on('click', function () {
+			$.ajax({
+				url: '/createWish',
+				type: 'get',
+				data: {
+					username: username.val(),
+					content: content.val()
+				},
+				success: function (data) {
+					// 如果愿望添加成功
+					if (data.code == 200) {
+						// 关闭弹框
+						$('#close').trigger('click');
+						// 清空表单
+						username.val('');
+						content.val('');
+
+						var html = `
+							<dl class="paper a${Math.ceil(Math.random()*5)}">
+								<dt>
+									<span class="username">${data.result.username}</span>
+								</dt>
+								<dd class="content">${data.result.content}</dd>
+								<dd class="bottom">
+									<span class="time">今天${data.result.publishDate}</span>
+									<a href="" class="close"></a>
+								</dd>
+							</dl>
+						`;
+
+						var obj = $(html).appendTo('#main');
+
+						drag(obj, $('dt', obj));
+					}
+					alert(data.message);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 不需要参数 返回的是 小数 
+        console.log(Math.random());
+        // 随机生成  1 ~ 10 之间的一个整数 （包含 1 和 10本身）
+        // 但是非常恶心的是  我们的 random  [0, 1)
+        // Math.floor(Math.random() * (max - min + 1) + min);
+        // Math.floor(Math.random() * (10) + min);
+        // Math.floor(Math.random() * 10 + min);
+        // Math.floor([0, 1) * 10 + min);
+        // Math.floor([0, 10)  + min);
+        // Math.floor([0, 10)  + 1);
+        // Math.floor([1, 11) );
+        // Math.floor([1, 10] );
+
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        console.log(getRandom(1, 10));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
