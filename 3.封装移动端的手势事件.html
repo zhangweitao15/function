@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        #box {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box"></div>
+
+    <script type="text/javascript">
+        /*
+                			1. 确定用户是水平滑动还是垂直滑动
+
+                			2. 确定用户滑动的方向
+                		*/
+
+        // 为元素绑定手势事件
+        function swipe(el, options) {
+
+            var startX = 0;
+            var startY = 0;
+            var moveX = 0;
+            var moveY = 0;
+            var disX = 0;
+            var disY = 0;
+
+            // 没有发生touchmove事件
+            var isMove = false;
+
+            // 默认值
+            var defaults = {
+                swipeLeft: function() {},
+                swipeRight: function() {},
+                swipeDown: function() {},
+                swipeUp: function() {},
+                drag: function() {}
+            }
+
+            // 如果用户传参了 就用用户传的 如果没传 就用默认值
+            // for (var attr in options) {
+            // 	defaults[attr] = options[attr];
+            // }
+
+            // 对象覆盖 用第二个参数对象覆盖第一个参数对象 且覆盖结果会影响到原对象
+            Object.assign(defaults, options);
+
+            // 记录开始滑动的坐标
+            el.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].pageX;
+                startY = e.touches[0].pageY;
+                disX = startX - el.offsetLeft;
+                disY = startY - el.offsetTop;
+            });
+
+            // 记录滑动过程中的坐标
+            el.addEventListener('touchmove', function(e) {
+                moveX = e.touches[0].pageX;
+                moveY = e.touches[0].pageY;
+                isMove = true;
+
+                // 将touchstart事件发生时侯的x和y保存到当前的事件对象中
+                e.info = {
+                    startX: startX,
+                    startY: startY,
+                    disX: disX,
+                    disY: disY
+                }
+
+                // 将在touchmove事件发生的时候要做的事情写在函数外面 => drag
+                defaults.drag.call(el, e);
+
+            });
+
+            // 判断垂直滑动还是水平滑动 ...
+            el.addEventListener('touchend', function(e) {
+                // 如果发生了滑动事件
+                if (isMove) {
+                    // 水平边长
+                    var absX = Math.abs(moveX - startX);
+                    // 垂直边长
+                    var absY = Math.abs(moveY - startY);
+
+                    if (absX > absY) {
+                        // 水平
+                        // console.log('水平');
+
+                        if (moveX - startX > 0) {
+                            // console.log('向右滑动');
+                            defaults.swipeRight.call(el, e);
+
+                        } else {
+                            //console.log('向左滑动');
+                            defaults.swipeLeft.call(el, e);
+                        }
+
+                    } else {
+                        // 垂直
+                        // console.log('垂直');
+
+                        if (moveY - startY > 0) {
+                            // console.log('向下滑动');
+                            defaults.swipeDown.call(el, e);
+
+                        } else {
+                            // console.log('向上滑动');
+                            defaults.swipeUp.call(el, e);
+                        }
+                    }
+
+                }
+                // 初始isMove变量方便 下回触发事件的时候做判断
+                isMove = false;
+
+            });
+        }
+
+
+        // 获取页面中的box盒子
+        var box = document.querySelector('#box');
+
+        swipe(box, {
+            swipeLeft: function() {
+                // alert('向左滑动')
+            },
+            swipeRight: function() {
+                // alert('向右滑动')
+            },
+            drag: function(e) {
+                // 移动过程中的pageX和pageY
+                // e.touches[0].pageX;
+                // e.touches[0].pageY;
+
+                this.style.left = e.touches[0].pageX - e.info.disX + 'px';
+                this.style.top = e.touches[0].pageY - e.info.disY + 'px';
+            }
+        });
+    </script>
+</body>
+
+</html>
